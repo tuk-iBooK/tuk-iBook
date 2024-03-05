@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: frontend
+    #Dockerfile의 경로
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - ibook
+
+  backend:
+    container_name: backend
+    build: 
+      context: ./backend/ibook_backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - ibook
+    depends_on:
+      - mysql
+    restart: on-failure
+
+  mysql:
+    container_name: mysql
+  # 추가 작성 요망
+
+networks:
+  ibook:
+    driver: bridge
