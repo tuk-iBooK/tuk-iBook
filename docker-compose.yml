@@ -18,7 +18,7 @@ services:
       context: ./backend/ibook_backend
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8000:8000
     networks:
       - ibook
     depends_on:
