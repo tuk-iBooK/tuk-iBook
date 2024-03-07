@@ -12,5 +12,5 @@
 
 4. frontend, backend 작동 잘 진행되는지 확인하기
 
-- 실행시킨 컴퓨터의 포트와 연동되었기 때문에,  localhost:3000, localhost:8080으로 docker container 접근 가능
+- 실행시킨 컴퓨터의 포트와 연동되었기 때문에,  localhost:3000, localhost:8000으로 docker container 접근 가능
 - local mysql을 사용해야하는 경우, docker-compose.yml file의 mysql ports 부분을 3307:3306으로 변경 (컴퓨터 3307 포트 사용을 의미)
