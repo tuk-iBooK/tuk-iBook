@@ -1,16 +1,15 @@
 version: '3.7'
 
 services:
-  # frontend:
-  #   container_name: frontend
-  #   #Dockerfile의 경로
-  #   build: 
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3000:3000
-  #   networks:
-  #     - ibook
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - ibook
 
   backend:
     container_name: backend
@@ -53,12 +52,9 @@ services:
     volumes:
       # init.sql로 db 초기화
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - ibook
-
-
 
 networks:
   ibook:

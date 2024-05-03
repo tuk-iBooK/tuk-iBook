@@ -10,3 +10,4 @@ CREATE USER 'ibookuser'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'ibookuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 create database ibook;
+USE ibook;
