@@ -1,16 +1,16 @@
 version: '3.7'
 
 services:
-  frontend:
-    container_name: frontend
-    #Dockerfile의 경로
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    networks:
-      - ibook
+  # frontend:
+  #   container_name: frontend
+  #   #Dockerfile의 경로
+  #   build: 
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - ibook
 
   backend:
     container_name: backend
@@ -25,23 +25,40 @@ services:
       - mysql
     restart: on-failure
 
+  # mysql:
+  #   container_name: mysql
+  #   build: 
+  #     context: ./mysql
+  #     dockerfile: Dockerfile
+  #   command: mysqld --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #     # 만약 로컬로 mysql을 실행시키는 중인 경우 3307:3306으로 변경
+  #     - "3306:3306" 
+  #   volumes:
+  #     # init.sql로 db 초기화
+  #     - ./mysql/mysql-init-file:/docker-entrypoint-initdb.d/:ro
+  #     - ./mysql/data:/var/lib/mysql
+  #   networks:
+  #     - ibook
+
   mysql:
     container_name: mysql
-    build: 
-      context: ./mysql
-      dockerfile: Dockerfile
-    command: mysqld --default-authentication-plugin=mysql_native_password
+    image: mysql:8.0.37  # 버전을 특정 버전으로 지정
     environment:
       MYSQL_ROOT_PASSWORD: password
     ports:
-      # 만약 로컬로 mysql을 실행시키는 중인 경우 3307:3306으로 변경
-      - "3306:3306" 
+      - "3306:3306"
     volumes:
       # init.sql로 db 초기화
-      - ./mysql/mysql-init-file:/docker-entrypoint-initdb.d/:ro
-      - ./mysql/data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - ibook
+
+
 
 networks:
   ibook:
